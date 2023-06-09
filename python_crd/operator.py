@@ -1,6 +1,5 @@
 import kopf
 import kubernetes
-import yaml
 
 
 @kopf.on.create('f4rsh4d.io', 'v1', 'nginx')
@@ -10,7 +9,7 @@ def create_fn(body, spec, **kwargs):
     namespace = body['metadata']['namespace']
     nodeport = spec['nodeport']
     image = 'nginx:1.14.2'
-    port = 8080
+    port = 80
     if not nodeport:
         raise kopf.HandlerFatalError(f"Nodeport must be set. Got {nodeport}.")
 
