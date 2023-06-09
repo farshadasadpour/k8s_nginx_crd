@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-operator
+  labels:
+    app: nginx-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-operator
+  template:
+    metadata:
+      name: nginx_operator
+      labels:
+        app: nginx-operator
+    spec:
+      serviceAccountName: nginx-operator
+      containers:
+        - name: nginx-operator
+          image: f4rsh4d/operator-nginx:latest
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
