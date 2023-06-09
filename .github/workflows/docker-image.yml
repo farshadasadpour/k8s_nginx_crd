@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build ./python_crd --file Dockerfile --tag f4rsh4d/operator-nginx:latest
+      run: docker build . --file Dockerfile --tag f4rsh4d/operator-nginx:latest
