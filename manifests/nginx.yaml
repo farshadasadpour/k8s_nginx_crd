@@ -1,0 +1,6 @@
+apiVersion: f4rsh4d.io/v1
+kind: Nginx
+metadata:
+  name: nginx-testing
+spec:
+  nodeport: 30087
