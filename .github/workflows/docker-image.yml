@@ -32,4 +32,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tag: f4rsh4d/operator-nginx:latest
+          tags: f4rsh4d/operator-nginx:latest
