@@ -7,11 +7,11 @@ def create_fn(body, spec, **kwargs):
     # Get info from nginx object
     name = body['metadata']['name']
     namespace = body['metadata']['namespace']
-    nodeport = spec['nodeport']
+    nodeport = spec.get('nodeport')
     image = 'nginx:1.14.2'
     port = 80
     if not nodeport:
-        raise kopf.HandlerFatalError(f"Nodeport must be set. Got {nodeport}.")
+        raise kopf.PermanentError(f"Nodeport must be set. Got {nodeport!r}.")
 
         # Pod template
     pod = {'apiVersion': 'v1', 'metadata': {'name': name, 'labels': {'app': 'nginx'}},
@@ -22,7 +22,7 @@ def create_fn(body, spec, **kwargs):
                                                                     'ports': [{'port': port, 'targetPort': port,
                                                                                'nodePort': nodeport}]}}
 
-    # Make the Pod and Service the children of the grafana object
+    # Make the Pod and Service the children of the nginx object
     kopf.adopt(pod, owner=body)
     kopf.adopt(svc, owner=body)
 
