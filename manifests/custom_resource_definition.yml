@@ -1,18 +1,39 @@
-apiVersion: apiextensions.k8s.io/v1beta1 
-kind: CustomResourceDefinition 
-metadata: 
-  name: nginx.f4rsh4d.io
-spec: 
-  scope: Namespaced 
-  group: f4rsh4d
-  versions: 
-    - name: v1 
-      served: true 
-      storage: true 
-  names: 
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: nginxs.f4rsh4d.io
+spec:
+  group: f4rsh4d.io
+  versions:
+    - name: v1beta1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            host:
+              type: string
+            port:
+              type: string
+    - name: v1
+      served: true
+      storage: false
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            host:
+              type: string
+            port:
+              type: string
+  conversion:
+    strategy: None
+  scope: Namespaced
+  names:
     kind: Nginx
-    plural: nginx
+    plural: nginxs
     singular: nginx
-    shortNames: 
-      - ng 
-      - ngx 
+    shortNames:
+      - ng
+      - ngx
