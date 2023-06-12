@@ -11,7 +11,7 @@ spec:
       app: nginx-operator
   template:
     metadata:
-      name: nginx_operator
+      name: nginx-operator
       labels:
         app: nginx-operator
     spec:
