@@ -1,10 +1,12 @@
 import kopf
 import kubernetes
+import logging
 
 
 @kopf.on.create('f4rsh4d.io', 'v1', 'nginx')
 def create_fn(body, spec, **kwargs):
     # Get info from nginx object
+    logging.info(f"A handler is called with body: {body}")
     name = body['metadata']['name']
     namespace = body['metadata']['namespace']
     nodeport = spec.get('nodeport')
@@ -44,5 +46,6 @@ def create_fn(body, spec, **kwargs):
 
 @kopf.on.delete('f4rsh4d.io', 'v1', 'nginx')
 def delete(body, **kwargs):
+    logging.info(f"A handler is called with body: {body}")
     msg = f"Nginx {body['metadata']['name']} and its Pod / Service children deleted"
     return {'message': msg}
